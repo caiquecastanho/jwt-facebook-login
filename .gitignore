@@ -1,0 +1,10 @@
+/node_modules/*
+/grafana/data/*
+npm-debug.log
+coverage
+.vscode
+.nyc_output
+/src/logs
+Scrapbook-2.mongo
+package-lock.json
+test-report.xml
