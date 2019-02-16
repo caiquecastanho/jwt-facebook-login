@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "JWT API REST Authentication using Facebook",
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "dev": "node_modules/.bin/nodemon -L --inspect=0.0.0.0:9229 ./bin/www"
   },
   "author": "Caique Bolognesi",
@@ -12,6 +12,7 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "express-swagger-generator": "^1.1.11",
     "jsonwebtoken": "^8.4.0"
   }
 }

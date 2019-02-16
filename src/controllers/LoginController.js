@@ -1,12 +1,12 @@
 const axios = require('axios');
-var jsonWebToken = require('jsonwebtoken');
+const jsonWebToken = require('jsonwebtoken');
+
+//TO DO: include the jwtSecret in env variable
+const jwtSecret = process.env.JWT_SECRET;
 
 class LoginController{
     // Verifys the facebook token
     static async login(req, res){
-        //TO DO: include the jwtSecret in env variable
-        var jwtSecret = 'mysecretkey';
-
         let facebookToken = req.get('facebookToken');
         if(!facebookToken){
             res.status(400).json({
@@ -19,11 +19,12 @@ class LoginController{
             var facebookResponse = await axios.get(path);
             if(facebookResponse.status == 200 && facebookResponse.data.id){
                 var accessToken = jsonWebToken.sign(facebookResponse.data, jwtSecret, {
-                    //Set the expiration
-                    expiresIn: 86400 //we are setting the expiration time of 1 day.
+                    expiresIn: 86400
                 });
 
-                res.status(200).send(accessToken);
+                res.status(200).json({
+                    token: accessToken
+                });
             }else{
                 res.status(401).json({
                     message: 'Invalid Facebook token'
@@ -36,6 +37,22 @@ class LoginController{
                 res.status(500).json({
                     message: 'It was not possible to validate the Facebook token'
                 });
+            }
+        }
+    }
+
+    static verify(req, res){
+        let jwtToken = req.get('jwtToken');
+        if(!jwtToken){
+            res.status(400).json({
+                message: 'JWT is required'
+            });
+        }else{
+            try {
+                var decoded = jsonWebToken.verify(jwtToken, jwtSecret);
+                res.status(200).json(decoded);
+            } catch(err) {
+                res.status(401).send();
             }
         }
     }
