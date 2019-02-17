@@ -3,7 +3,6 @@ FROM node:10.5-alpine
 WORKDIR /var/app
 
 ENV NODE_ENV=production
-ENV JWT_SECRET=secret
 
 COPY package.json /var/app/
 

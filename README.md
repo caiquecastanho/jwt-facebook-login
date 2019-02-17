@@ -15,3 +15,6 @@ docker build -t jwt-login:1.0.0 .
 docker run -p 3000:3000 jwt-login:1.0.0
 ```
 Go to http://localhost:3000/api-docs
+
+## Link
+Inspired of https://github.com/tkanos/FacebookRestAuthentication
